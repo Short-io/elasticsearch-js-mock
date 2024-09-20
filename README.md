@@ -1,8 +1,6 @@
-<img align="right" width="auto" height="auto" src="https://www.elastic.co/static-res/images/elastic-logo-200.png">
-
 # Opensearch Node.js client mock utility
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  ![build](https://github.com/elastic/elasticsearch-js-mock/workflows/build/badge.svg)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  ![build](https://github.com/short-io/opensearch-js-mock/workflows/build/badge.svg)
 
 When testing your application you don't always need to have an Elasticsearch instance up and running, but you might still need to use the client for fetching some data. If you are facing this situation, this library is what you need.
 
@@ -14,7 +12,7 @@ When testing your application you don't always need to have an Elasticsearch ins
 
 ## Install
 ```
-npm install @elastic/elasticsearch-mock --save-dev
+npm install @short.io/opensearch-js-mock --save-dev
 ```
 
 ## Usage
