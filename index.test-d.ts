@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information
 
 import { expectType, expectError } from 'tsd'
-import { Client } from '@elastic/elasticsearch'
+import { Client } from '@opensearch-project/opensearch'
 import Mock, { MockPattern } from './'
 
 const mock = new Mock()

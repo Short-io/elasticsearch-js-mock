@@ -5,7 +5,7 @@
 'use strict'
 
 const test = require('ava')
-const { Client, errors } = require('@elastic/elasticsearch')
+const { Client, errors } = require('@opensearch-project/opensearch')
 const intoStream = require('into-stream')
 const Mock = require('./')
 
@@ -260,19 +260,20 @@ test('Should handle compressed streaming body', async t => {
   })
 })
 
-test.cb('Abort a request (with callbacks)', t => {
+test('Abort a request (with callbacks)', t => {
   const mock = new Mock()
   const client = new Client({
     node: 'http://localhost:9200',
     Connection: mock.getConnection()
   })
+  return new Promise((resolve, reject) => {
+    const r = client.cat.indices((err, result) => {
+      t.true(err instanceof errors.RequestAbortedError)
+      resolve()
+    })
 
-  const r = client.cat.indices((err, result) => {
-    t.true(err instanceof errors.RequestAbortedError)
-    t.end()
+    r.abort()
   })
-
-  r.abort()
 })
 
 test('Abort a request (with promises)', async t => {
@@ -876,27 +877,5 @@ test('Should clear all mocks', async t => {
     t.true(err instanceof errors.ResponseError)
     t.deepEqual(err.body, { error: 'Mock not found' })
     t.is(err.statusCode, 404)
-  }
-})
-
-test('Override product check', async t => {
-  const mock = new Mock()
-  const client = new Client({
-    node: 'http://localhost:9200',
-    Connection: mock.getConnection()
-  })
-
-  mock.add({
-    method: 'GET',
-    path: '/'
-  }, () => {
-    return { something: 'else' }
-  })
-
-  try {
-    await client.cat.nodes()
-    t.fail('Should throw')
-  } catch (err) {
-    t.true(err instanceof errors.ProductNotSupportedError)
   }
 })

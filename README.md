@@ -20,8 +20,8 @@ npm install @elastic/elasticsearch-mock --save-dev
 ## Usage
 
 ```js
-const { Client } = require('@elastic/elasticsearch')
-const Mock = require('@elastic/elasticsearch-mock')
+const { Client } = require('@opensearch-project/opensearch')
+const Mock = require('@opensearch/opensearch-mock')
 
 const mock = new Mock()
 const client = new Client({
